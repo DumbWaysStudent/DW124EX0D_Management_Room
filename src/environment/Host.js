@@ -1,4 +1,4 @@
 export default class Host{
-    static localhost = 'https://komikoserver.herokuapp.com/api/v1'
-    static imageHost = "https://komikoserver.herokuapp.com"
+    static localhost = 'http://192.168.58.1:7003/api/v1'
+    static imageHost = "http://192.168.58.1:7003"
 }

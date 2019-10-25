@@ -26,7 +26,7 @@ export default class Login extends Component {
     constructor() {
         super() 
         this.state = {
-            email : '',
+            username : '',
             password : '',
             iconpsw : "ios-eye-off",
             shwhidepsw: true,
@@ -44,7 +44,7 @@ export default class Login extends Component {
     _handleLogin = async() => {
         try {
         const loginData = {
-            email : this.state.email,
+            username : this.state.username,
             password : this.state.password
         }
         const user = await axios.post(`${Host.localhost}/login` , loginData)
@@ -52,7 +52,7 @@ export default class Login extends Component {
             await AsyncStorage.setItem('userToken', user.data );
                 const objJwt = await jwt.decode(
                 user.data, // the token
-                'webtoonclone', // the secret
+                'roommanagement', // the secret
                 {
                     skipValidation: true // to skip signature and exp verification
                 }
@@ -70,14 +70,14 @@ export default class Login extends Component {
         return (
             <View style={[stylesglobe.background, stylesglobe.paddingContainer, {flex :1}]}>
                 <View style={{flex : 3}}>
-                    <Image style={styles.imageLogo} source={require('../assets/image/logo.jpg')} />
+                    <Image style={styles.imageLogo} source={require('../assets/image/logo.png')} />
                 </View>
                 <View style={styles.wrapformfield}>
                     <InputTextX 
                     value={this.state.email}
-                    handleChangeText={text => this.setState({email : text})}
+                    handleChangeText={text => this.setState({username : text})}
                     secured={false}
-                    keyboardType="email-address" icon={true} iconName="person" label="Email"/>
+                    keyboardType="email-address" icon={true} iconName="person" label="Username"/>
                     <Item floatingLabel>
                             <Icon name="ios-lock" style={styles.iconLock}/>
                             <Label>Password</Label>
@@ -98,7 +98,7 @@ export default class Login extends Component {
                             Lupa kata sandi ?
                         </Text>
                     </View>
-                    <ButtonLogReg disabled={emailvalid(this.state.email) ? this.state.password != "" ? false : true : true} 
+                    <ButtonLogReg 
                     btnTitle="Login" 
                     onPressButton={this._handleLogin}/>
                 </View>

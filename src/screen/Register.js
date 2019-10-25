@@ -27,26 +27,28 @@ export default class Register extends Component {
     constructor() {
         super() 
         this.state = {
-            email : '',
+            idCard : '',
             password : '',
-            fullname : '',
+            username : '',
+            phonenumber : ''
         }
     }
 
     _handleRegister = async () => {
         try {
-        const {fullname , email, password} = this.state
+        const {username , idCard,phonenumber, password} = this.state
         const Data = {
-            fullname,
-            email,
+            username,
+            idCard,
             password,
+            phonenumber
         }
         const user = await axios.post(`${Host.localhost}/register`, Data)
         if(user) {
             await AsyncStorage.setItem('userToken', user.data );
                 const objJwt = await jwt.decode(
                 user.data, // the token
-                'webtoonclone', // the secret
+                'roomanagement', // the secret
                 {
                     skipValidation: true // to skip signature and exp verification
                 }
@@ -62,7 +64,7 @@ export default class Register extends Component {
 
     formValid = () => {
         emailvalid(this.state.email) ?
-        this.state.fullname != "" ? 
+        this.state.username != "" ? 
         this.state.password != "" 
         : false 
         : true
@@ -72,15 +74,12 @@ export default class Register extends Component {
         return (
             <View style={[stylesglobe.background, stylesglobe.paddingContainer, {flex :1}]}>
                 <View style={{flex : 2}}>
-                    <Image style={styles.imageLogo} source={require('../assets/image/logo.jpg')} />
+                    <Image style={styles.imageLogo} source={require('../assets/image/logo.png')} />
                 </View>
                 <View style={styles.wrapformfield}>
                     <InputTextX 
-                    handleChangeText={text => this.setState({email : text})}
-                    keyboardType="email-address" icon={true} iconName="mail-open" label="Email"/>
-                    <InputTextX 
-                    handleChangeText={text => this.setState({fullname : text})}
-                    keyboardType="default" icon={true} iconName="person" label="Fullname"/>
+                    handleChangeText={text => this.setState({username : text})}
+                    keyboardType="email-address" icon={true} iconName="mail-open" label="Username"/>                   
                     <Item floatingLabel>
                         <Icon name="ios-lock" style={styles.iconLock}/>
                         <Label>Password</Label>
@@ -91,6 +90,12 @@ export default class Register extends Component {
                         onChangeText={(text)=> this.setState({password: text})}
                         />
                     </Item>
+                    <InputTextX 
+                    handleChangeText={text => this.setState({idCard : text})}
+                    keyboardType="number-pad" icon={true} iconName="person" label="Id Card"/>
+                    <InputTextX 
+                    handleChangeText={text => this.setState({phonenumber : text})}
+                    keyboardType="number-pad" icon={true} iconName="call" label="Phone Number"/>
                 </View>
                 <View style={styles.wrapBtn}>
                     <ButtonLogReg btnTitle="Daftar" onPressButton={this._handleRegister}/>
