@@ -4,21 +4,21 @@ const initialState = {
     error : false
 }
 
-const favoriteReducer = (state = initialState, actions) => {
+const reducerCustomer = (state = initialState, actions) => {
     switch(actions.type) {
-        case "GET_USERFAV":
+        case "GET_CUSTOMER":
             return {
                 ...state,
                 data : actions.payload,
                 isLoading : true
             }
-        case "GET_USERFAV_FULFILLED":
+        case "GET_CUSTOMER_FULFILLED":
             return {
                 ...state,
                 data: actions.payload.data,
                 isLoading: false
             };
-        case "GET_USERFAV_REJECTED" : 
+        case "GET_CUSTOMER_REJECTED" : 
             return {
                 ...state,
                 isLoading : false,
@@ -29,4 +29,4 @@ const favoriteReducer = (state = initialState, actions) => {
     }
 }
 
-export default favoriteReducer
+export default reducerCustomer

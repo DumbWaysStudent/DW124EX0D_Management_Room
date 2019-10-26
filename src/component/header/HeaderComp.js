@@ -4,31 +4,18 @@ import {
  } from 'react-native';
 import {
     Header ,
-    Left,
-    Button,
-    Icon,
     Body,
     Title,
-    Right
+    Center
 } from 'native-base'
 
 export default class HeaderComp extends Component {
     render() {
         return (
-            <Header androidStatusBarColor="#443737" style={{ backgroundColor : '#443737'}}>
-                <Left>
-                    <Button transparent onPress={this.props.onPressBack} >
-                        <Icon  name="ios-arrow-round-back"/>
-                    </Button>
-                </Left>
-                <Body>
+            <Header androidStatusBarColor="#64ccda" style={{ backgroundColor : '#64ccda'}}>
+                <Body style={{alignItems : "center"}}>
                     <Title style={{fontFamily: 'OpenSans-SemiBold'}}>{this.props.title}</Title>
                 </Body>
-                {this.props.iconDua ? 
-                <Right>
-                    <Icon style={{color : 'white'}} name={this.props.iconDuaName} onPress={this.props.pressIconDua}/>
-                </Right>
-                : null}
             </Header>
         );
     }

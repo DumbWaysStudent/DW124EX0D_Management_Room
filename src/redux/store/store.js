@@ -2,16 +2,13 @@ import { createStore, combineReducers, applyMiddleware} from 'redux'
 
 import promise from 'redux-promise-middleware'
 
+import reducerRoom from '../reducer/reducerRoom'
+import reducerCustomer from '../reducer/reducerCustomer'
 
-import allReducer from '../reducer/allReducer'
-import userReducer from '../reducer/userReducer'
-import webtoonReducer from '../reducer/webtoonReducer'
-import favoriteReducer from '../reducer/favoriteReducer'
 const reducer = combineReducers({
-    userReducer,
-    webtoonReducer,
-    allReducer,
-    favoriteReducer
+    Room : reducerRoom,
+    Customer : reducerCustomer
+
 })
 
 const store = createStore(reducer , applyMiddleware(promise))

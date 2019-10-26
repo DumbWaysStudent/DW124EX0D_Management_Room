@@ -34,7 +34,7 @@ const styles = StyleSheet.create({
     btnText : {
         justifyContent : "center",
         borderRadius : 10,
-        backgroundColor : '#443737'
+        backgroundColor : '#64ccda'
     },
     buttonKecil : {
         width:70, 
